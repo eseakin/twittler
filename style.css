@@ -1,0 +1,77 @@
+#titlebar{
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:10;
+	width:100%;
+	height:120px;
+	background-color: white;
+	border-bottom:1px solid #ddd;
+}
+
+#navbar{
+	margin:20px 0 0 0;
+}
+
+#navlist{
+	text-decoration: none;
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+#navlist>li{
+	margin:5px 10px;
+	display:inline;
+}
+#navlist>li>a{
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family:courier;
+	font-weight: 700;
+	color: #025B89;
+}
+#navlist>li>a:hover{
+	color:#30B8FF;
+}
+
+
+#feed{
+	margin:150px 0 0 0;
+}
+
+#title{
+	margin:10px 100px 0 0;
+	text-align: center;
+	font-size: 50px;
+	font-family: 'Lobster', cursive;
+	color:red;
+	font-weight: 600;
+}
+
+.tweet{
+	margin:0 200px;
+	padding: 7px;
+	text-align: center;
+	background-color:#68E2FF;
+	color: white;
+	font-size:20px;
+	border-bottom:1px solid #e3e3e3;
+}
+.tweetbg1{
+	background-color:#0086CA;
+}
+.tweetbg2{
+	background-color:#025B89;
+}
+.shawndrost{
+
+}
+.sharksforcheap{
+
+}
+.mracus{
+
+}
+.douglascalhoun{
+
+}

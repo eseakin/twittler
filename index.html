@@ -1,27 +1,91 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel='shortcut icon' href="favicon.ico" type='image/x-icon' />
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <title>Twittler</title>
   </head>
   <body>
+    <div id="titlebar">
+      <div id="navbar">
+        <ul id="navlist">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Notifications</a></li>
+          <li><a href="#">Messages</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </div>
 
-  <div>test</div>
+      <div id="title"><img src="img/twittlerlogo.png"/>Twittler</div>
+    </div>
+
+    <div id="feed"></div>
 
     <script>
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+      $(document).ready(function(){
+        var $feed = $('#feed');
+        $feed.html('');
+        var index = 0;
+
+        setInterval(function(){
+          for(index;index < streams.home.length; index++){
+            var tweet = streams.home[index];
+            var $tweet;
+
+            if(index % 2 === 0){
+              $tweet = $('<p class="tweet tweetbg1" style="display:none;"></p>');
+            }else{
+              $tweet = $('<p class="tweet tweetbg2" style="display:none;"></p>');
+            }
+
+            var date = new Date();
+            var timestamp = '';
+            var minutes = date.getMinutes();
+            if(minutes < 10){
+              minutes = "0"+minutes;
+            }
+
+            if(date.getHours() > 12){
+              timestamp = date.getHours()-12 + ":" + minutes + "pm";
+            }else{
+              timestamp = date.getHours() + ":" + minutes + "am";
+            }
+
+
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + " " + timestamp);
+            $tweet.addClass(tweet.user)
+            var classIn = null;
+            var filterCheck = "."+tweet.user;
+            //console.log("classIn out ",classIn);
+            if(classIn === null){
+              $tweet.prependTo($feed).fadeIn(500);
+            }else{
+              if(filterCheck === classIn){
+                $tweet.prependTo($feed).fadeIn(500);
+              }
+            }
+
+
+            function classFilter(classIn){
+              //console.log(classIn);
+              classIn = "."+classIn;
+              $(".tweet").not(classIn).fadeOut(500);
+            }
+
+            $('.'+tweet.user).click(function(){
+              classFilter(tweet.user);
+            });
+          }
+        },500);
+
+        // $(.tweet).each(function(){
+        //   $(this).trigger('click');
+        // });
 
       });
 
