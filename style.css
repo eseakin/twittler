@@ -4,7 +4,7 @@
 	left:0;
 	z-index:10;
 	width:100%;
-	height:120px;
+	height:140px;
 	background-color: white;
 	border-bottom:1px solid #ddd;
 }
@@ -48,14 +48,39 @@
 	font-weight: 600;
 }
 
-.tweet{
-	margin:0 200px;
-	padding: 7px;
+#instructions{
+	position:fixed;
 	text-align: center;
+	width:100%;
+	top:115px;
+	z-index: 15;
+}
+
+.date{
+	font-size:14px;
+	color:#ddd;
+}
+
+.tweet{
+	margin:0px auto;
+	padding: 7px 7px 7px 52px;
+	width:40%;
+	max-width:500px;
+	min-width: 300px;
+	min-height:39px;
+	text-align: left;
 	background-color:#68E2FF;
 	color: white;
 	font-size:20px;
 	border-bottom:1px solid #e3e3e3;
+	cursor:pointer;
+	background-position: left;
+	background-repeat:no-repeat;
+	transition: border .2s;
+}
+.tweet:hover{
+	border-right: 10px solid white !important;
+
 }
 .tweetbg1{
 	background-color:#0086CA;
@@ -64,14 +89,18 @@
 	background-color:#025B89;
 }
 .shawndrost{
-
+background-image: url("img/face1.png");
+/*background-color*/:#045900;
 }
 .sharksforcheap{
-
+background-image: url("img/face2.png");
+/*background-color*/:#0f0f6a;
 }
 .mracus{
-
+background-image: url("img/face3.png");
+/*background-color*/:#0086CA;
 }
 .douglascalhoun{
-
+background-image: url("img/face4.png");
+/*background-color*/:##0086CA;
 }

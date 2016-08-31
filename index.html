@@ -20,74 +20,109 @@
       </div>
 
       <div id="title"><img src="img/twittlerlogo.png"/>Twittler</div>
+      <div id="instructions">Click to filter, click again to undo.</div>
     </div>
+
+
 
     <div id="feed"></div>
 
     <script>
+      var filterCheck = undefined;
 
+      var weekday = ["Sun","Mon","Tues","Wed",",Thurs","Fri","Sat"];
 
       $(document).ready(function(){
         var $feed = $('#feed');
         $feed.html('');
         var index = 0;
 
-        setInterval(function(){
+
+
+
+
+       setInterval(function(){
           for(index;index < streams.home.length; index++){
             var tweet = streams.home[index];
-            var $tweet;
+            var $tweet = $('<div class="tweet" id='+index+' style="display:none;"></div>');
 
-            if(index % 2 === 0){
-              $tweet = $('<p class="tweet tweetbg1" style="display:none;"></p>');
-            }else{
-              $tweet = $('<p class="tweet tweetbg2" style="display:none;"></p>');
-            }
+            //timestamp
 
             var date = new Date();
             var timestamp = '';
             var minutes = date.getMinutes();
-            if(minutes < 10){
+            if(minutes < 10)
               minutes = "0"+minutes;
-            }
+
+            var hours = date.getHours();
+            if(hours === 0)
+              hours = 12;
 
             if(date.getHours() > 12){
-              timestamp = date.getHours()-12 + ":" + minutes + "pm";
+              timestamp = weekday[date.getDay()] + ", " + date.getHours()-12 + ":" + minutes + "pm";
             }else{
-              timestamp = date.getHours() + ":" + minutes + "am";
+              timestamp = weekday[date.getDay()] + ", " + hours + ":" + minutes + "am";
             }
+            //add timestamp to date block
+            var $date = $('<div class="date" style="display:none"</div>');
+            $date.text(timestamp);
 
-
-            $tweet.text('@' + tweet.user + ': ' + tweet.message + " " + timestamp);
+            //tweets
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
             $tweet.addClass(tweet.user)
-            var classIn = null;
-            var filterCheck = "."+tweet.user;
-            //console.log("classIn out ",classIn);
-            if(classIn === null){
-              $tweet.prependTo($feed).fadeIn(500);
+
+            //alternating color scheme
+            index % 2 === 0 ? $tweet.addClass("tweetbg1") : $tweet.addClass("tweetbg2");
+
+            //filter new tweets as they are created
+            if(filterCheck === undefined){
+              $tweet.prependTo($feed).slideDown();
+              $date.appendTo($tweet).slideDown();
             }else{
-              if(filterCheck === classIn){
-                $tweet.prependTo($feed).fadeIn(500);
+              if(filterCheck === tweet.user){
+                $tweet.prependTo($feed).slideDown();
+                $date.appendTo($tweet).slideDown();
+              }else{
+                $tweet.prependTo($feed);
+                $date.appendTo($tweet);
               }
             }
 
+            //add click event
+            $('#'+index).click(function(){
+              //console.log("click added to "+this.id);
+              if(this.classList.contains("shawndrost")){
+                classFilter("shawndrost");
+              }else if(this.classList.contains("mracus")){
+                classFilter("mracus");
+              }else if(this.classList.contains("sharksforcheap")){
+                classFilter("sharksforcheap");
+              }else if(this.classList.contains("douglascalhoun")){
+                classFilter("douglascalhoun");
+              }
 
-            function classFilter(classIn){
-              //console.log(classIn);
-              classIn = "."+classIn;
-              $(".tweet").not(classIn).fadeOut(500);
-            }
-
-            $('.'+tweet.user).click(function(){
-              classFilter(tweet.user);
             });
-          }
-        },500);
 
-        // $(.tweet).each(function(){
-        //   $(this).trigger('click');
-        // });
+          }
+       },500);
 
       });
+
+      //onclick function to filter by username
+      function classFilter(classIn){
+        console.log("classin ",classIn);
+        console.log("filter ",filterCheck);
+        if(filterCheck === undefined){
+          filterCheck = classIn;
+          $('.tweet').not('.'+classIn).slideUp();
+
+        }else{
+          filterCheck = undefined;
+          classIn = '.'+classIn;
+          $('.tweet').slideDown();
+        }
+
+      }
 
     </script>
   </body>
