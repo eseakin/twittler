@@ -95,18 +95,28 @@
 
             //add click event
             $('#'+index).click(function(){
-              //console.log("click added to "+this.id);
-              if(this.classList.contains("shawndrost")){
-                classFilter("shawndrost");
-              }else if(this.classList.contains("mracus")){
-                classFilter("mracus");
-              }else if(this.classList.contains("sharksforcheap")){
-                classFilter("sharksforcheap");
-              }else if(this.classList.contains("douglascalhoun")){
-                classFilter("douglascalhoun");
-              }else if(this.classList.contains("visitor")){
-                classFilter("visitor");
-              }
+              console.log("clicked "+this.id);
+
+              for(var keys in streams.users){
+              console.log("testing "+keys);
+                if(this.classList.contains(keys)){
+                  console.log("passed "+keys);
+                  classFilter(keys);
+                }
+              };
+
+
+              // if(this.classList.contains("shawndrost")){
+              //   classFilter("shawndrost");
+              // }else if(this.classList.contains("mracus")){
+              //   classFilter("mracus");
+              // }else if(this.classList.contains("sharksforcheap")){
+              //   classFilter("sharksforcheap");
+              // }else if(this.classList.contains("douglascalhoun")){
+              //   classFilter("douglascalhoun");
+              // }else if(this.classList.contains("visitor")){
+              //   classFilter("visitor");
+              // }
 
             });
 
@@ -119,12 +129,13 @@
         $("#twittForm").submit(function(){
           var input = document.getElementById("newTwittBox").value;
           if(input===''){
-            alert("Type a Twitt!");
+            document.getElementById("newTwittBox").placeholder = "Please Type a Twitt!";
             $('#twittForm').trigger("reset");
             return;
           }
           writeTweet(input);
           $('#twittForm').trigger("reset");
+          document.getElementById("newTwittBox").placeholder = "New Twitt";
         });
 
       });
