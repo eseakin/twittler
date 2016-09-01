@@ -29,14 +29,38 @@
 	font-family:courier;
 	font-weight: 700;
 	color: #025B89;
+	transition:color .2s;
 }
 #navlist>li>a:hover{
 	color:#30B8FF;
 }
-
+#newTwitt{
+	margin:150px auto 0px auto;
+	text-align: center;
+	font-size:18px;
+}
+#newTwitt>p{
+	margin:10px;
+}
+#newTwitt>form>input{
+	padding:0 5px;
+	margin: 0 5px;
+	font-size:18px;
+}
+#newTwitt>form{
+	margin:0;
+}
+#submit{
+	padding:5px;
+	border-radius:3px;
+	background-color:#0086CA;
+	border:1px solid gray;
+	color:white;
+	font-size:18px;
+}
 
 #feed{
-	margin:150px 0 0 0;
+	margin:35px 0 0 0;
 }
 
 #title{
@@ -80,7 +104,6 @@
 }
 .tweet:hover{
 	border-right: 10px solid white !important;
-
 }
 .tweetbg1{
 	background-color:#0086CA;
@@ -102,5 +125,9 @@ background-image: url("img/face3.png");
 }
 .douglascalhoun{
 background-image: url("img/face4.png");
+/*background-color*/:##0086CA;
+}
+.visitor{
+background-image: url("img/visitor.png");
 /*background-color*/:##0086CA;
 }
